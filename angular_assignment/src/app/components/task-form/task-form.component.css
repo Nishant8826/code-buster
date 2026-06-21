@@ -1,0 +1,95 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.input-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+.input-main-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.title-input {
+  padding-right: 48px; /* Room for the note toggle */
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.title-input.invalid {
+  border-color: var(--danger);
+}
+
+.title-input.invalid:focus {
+  box-shadow: 0 0 0 4px var(--danger-light);
+}
+
+.desc-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.desc-toggle-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+}
+
+.desc-toggle-btn.active {
+  color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.submit-btn {
+  height: 48px;
+}
+
+.error-msg {
+  font-size: 0.8rem;
+  color: var(--danger);
+  font-weight: 600;
+  margin-top: -4px;
+  margin-left: 4px;
+}
+
+.description-wrapper {
+  width: 100%;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.desc-input {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .submit-btn {
+    width: 100%;
+  }
+}

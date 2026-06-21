@@ -1,0 +1,236 @@
+.task-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-gradient);
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.task-card.completed::before {
+  background: var(--success);
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-muted);
+}
+
+.task-card.editing {
+  display: block;
+  border-color: var(--border-focus);
+}
+
+.task-content-wrapper {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex: 1;
+}
+
+/* Custom Checkbox */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 2px;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  height: 22px;
+  width: 22px;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--success);
+  border-color: var(--success);
+}
+
+.check-icon {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: var(--transition-fast);
+}
+
+.checkbox-container input:checked ~ .checkmark .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Task Details */
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.task-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  transition: var(--transition);
+}
+
+.task-card.completed .task-title {
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.task-description {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  transition: var(--transition);
+}
+
+.task-card.completed .task-description {
+  opacity: 0.5;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.calendar-icon {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.task-date {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Task Action Buttons */
+.task-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0.3;
+  transition: var(--transition-fast);
+}
+
+.task-card:hover .task-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.action-btn span {
+  font-size: 1.2rem;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-light);
+  color: var(--danger);
+}
+
+/* Edit Form Styles */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-title-input {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.edit-desc-input {
+  font-size: 0.9rem;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .task-actions {
+    opacity: 1;
+  }
+}
+
+
+.error-msg {
+  font-size: 0.8rem;
+  color: var(--danger);
+  font-weight: 600;
+  margin-top: -4px;
+  margin-left: 4px;
+}

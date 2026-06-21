@@ -1,0 +1,45 @@
+<div class="filter-bar-container">
+  <div class="search-wrapper">
+    <span class="material-symbols-outlined search-icon">search</span>
+    <input
+      type="text"
+      [value]="store.searchQuery()"
+      (input)="onSearchChange($event)"
+      placeholder="Search tasks..."
+      class="search-input"
+      aria-label="Search tasks"
+    />
+    @if (store.searchQuery()) {
+      <button class="clear-btn" (click)="clearSearch()" aria-label="Clear search">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    }
+  </div>
+
+  <div class="filter-actions">
+    <button
+      class="filter-btn"
+      [class.active]="store.filter() === 'all'"
+      (click)="setFilter('all')"
+    >
+      All
+      <span class="filter-count">{{ store.totalCount() }}</span>
+    </button>
+    <button
+      class="filter-btn"
+      [class.active]="store.filter() === 'pending'"
+      (click)="setFilter('pending')"
+    >
+      Pending
+      <span class="filter-count">{{ store.pendingCount() }}</span>
+    </button>
+    <button
+      class="filter-btn"
+      [class.active]="store.filter() === 'completed'"
+      (click)="setFilter('completed')"
+    >
+      Completed
+      <span class="filter-count">{{ store.completedCount() }}</span>
+    </button>
+  </div>
+</div>

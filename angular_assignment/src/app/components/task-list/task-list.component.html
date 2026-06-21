@@ -1,0 +1,24 @@
+<div class="task-list-container">
+  <div class="task-items-grid">
+    @for (todo of store.filteredTodos(); track todo.id) {
+      <app-task-item [todo]="todo" class="animate-fade-in"></app-task-item>
+    } @empty {
+      <div class="empty-state animate-fade-in">
+        <span class="material-symbols-outlined empty-icon">assignment_late</span>
+        <h3>No tasks found</h3>
+        <p>
+          @if (store.searchQuery() || store.filter() !== 'all') {
+            No tasks match your current search queries or active filters.
+          } @else {
+            Your task list is clear! Start by adding a task above.
+          }
+        </p>
+        @if (store.searchQuery() || store.filter() !== 'all') {
+          <button class="btn btn-secondary clear-filter-btn" (click)="clearFilters()">
+            Clear Filters
+          </button>
+        }
+      </div>
+    }
+  </div>
+</div>

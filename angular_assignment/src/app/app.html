@@ -1,0 +1,48 @@
+<div class="app-layout">
+  <header class="app-header">
+    <div class="container header-container">
+      <div class="logo-area">
+        <span class="material-symbols-outlined logo-icon">check_circle</span>
+        <div class="logo-text">
+          <h1>Code Buster TO DO</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main container">
+    <!-- Task Form component to add new items -->
+    <div class="dashboard-card animate-fade-in form-card">
+      <app-task-form></app-task-form>
+    </div>
+
+    <!-- Filter and Search Toolbar component -->
+    <div class="dashboard-card animate-fade-in filter-card" style="animation-delay: 0.1s;">
+      <app-filter-bar></app-filter-bar>
+    </div>
+
+    <!-- The actual List of tasks -->
+    <div class="list-section animate-fade-in" style="animation-delay: 0.2s;">
+      <app-task-list></app-task-list>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container footer-container">
+      <div class="stats-summary">
+        <div class="stat-badge">
+          <span class="stat-num">{{ store.totalCount() }}</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-badge success-badge">
+          <span class="stat-num">{{ store.completedCount() }}</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-badge pending-badge">
+          <span class="stat-num">{{ store.pendingCount() }}</span>
+          <span class="stat-label">Pending</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

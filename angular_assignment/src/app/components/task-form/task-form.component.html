@@ -1,0 +1,54 @@
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" class="task-form" novalidate>
+  <div class="input-row">
+    <div class="input-main-wrapper">
+      <input
+        type="text"
+        name="title"
+        [(ngModel)]="taskTitle"
+        required
+        maxlength="100"
+        #titleInput="ngModel"
+        placeholder="What needs to be done?"
+        class="form-input title-input"
+        [class.invalid]="(titleInput.dirty || taskForm.submitted) && titleInput.invalid"
+        aria-label="New task title"
+      />
+      <button
+        type="button"
+        class="desc-toggle-btn"
+        [class.active]="showDescription()"
+        (click)="toggleDescription()"
+        title="Toggle task description"
+      >
+        <span class="material-symbols-outlined">notes</span>
+      </button>
+    </div>
+    
+    <button
+      type="submit"
+      [disabled]="taskForm.invalid"
+      class="btn btn-primary submit-btn"
+    >
+      <span class="material-symbols-outlined">add</span>
+      <span>Add Task</span>
+    </button>
+  </div>
+
+  @if ((titleInput.dirty || taskForm.submitted) && titleInput.hasError('required')) {
+    <span class="error-msg">Task title is required.</span>
+  }
+
+  @if (showDescription()) {
+    <div class="description-wrapper animate-fade-in">
+      <textarea
+        name="description"
+        [(ngModel)]="taskDescription"
+        maxlength="500"
+        placeholder="Add details or description (optional)..."
+        class="form-input desc-input"
+        rows="3"
+        aria-label="New task description"
+      ></textarea>
+    </div>
+  }
+</form>

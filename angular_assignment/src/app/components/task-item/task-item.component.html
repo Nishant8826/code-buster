@@ -1,0 +1,74 @@
+<div class="task-card" [class.completed]="todo().completed" [class.editing]="isEditing">
+  @if (!isEditing) {
+    <!-- Read Only Mode -->
+    <div class="task-content-wrapper">
+      <label class="checkbox-container">
+        <input 
+          type="checkbox" 
+          [checked]="todo().completed" 
+          (change)="toggleComplete()"
+          [attr.aria-label]="'Mark ' + todo().title + ' as ' + (todo().completed ? 'pending' : 'completed')"
+        />
+        <span class="checkmark">
+          <span class="material-symbols-outlined check-icon">check</span>
+        </span>
+      </label>
+
+      <div class="task-details">
+        <h3 class="task-title">{{ todo().title }}</h3>
+        @if (todo().description) {
+          <p class="task-description">{{ todo().description }}</p>
+        }
+        <div class="task-meta">
+          <span class="material-symbols-outlined calendar-icon">calendar_today</span>
+          <span class="task-date">{{ formatDate(todo().createdAt) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="task-actions">
+      <button class="action-btn edit-btn" (click)="startEdit()" title="Edit task" aria-label="Edit task">
+        <span class="material-symbols-outlined">edit</span>
+      </button>
+      <button class="action-btn delete-btn" (click)="deleteTask()" title="Delete task" aria-label="Delete task">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    </div>
+  } @else {
+    <!-- Edit Mode -->
+    <form [formGroup]="editForm" (ngSubmit)="saveEdit()" class="edit-form">
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="title"
+          class="form-input edit-title-input"
+          placeholder="Task title..."
+          [class.invalid]="editForm.get('title')?.touched && editForm.get('title')?.invalid"
+          aria-label="Edit task title"
+        />
+        @if (editForm.get('title')?.touched && editForm.get('title')?.hasError('required')) {
+          <span class="error-msg">Title is required.</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <textarea
+          formControlName="description"
+          class="form-input edit-desc-input"
+          placeholder="Description (optional)..."
+          rows="2"
+          aria-label="Edit task description"
+        ></textarea>
+      </div>
+
+      <div class="edit-actions">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="cancelEdit()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary btn-sm" [disabled]="editForm.invalid">
+          Save Changes
+        </button>
+      </div>
+    </form>
+  }
+</div>
